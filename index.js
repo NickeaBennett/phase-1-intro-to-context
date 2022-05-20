@@ -61,3 +61,11 @@ const allWagesFor = (record) => {
     }
     return pay
 }
+
+const findEmployeeByFirstName = () => {
+
+}
+
+const calculatePayroll = () => {
+    
+}
