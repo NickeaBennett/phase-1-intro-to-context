@@ -46,6 +46,7 @@ const hoursWorkedOnDate = (record, date) => {
     const timeOut = record.timeOutEvents.find(e => {
         return e.date === date
     }).hour
+    debugger
     return (timeOut - timeIn) / 100
 }
 
@@ -56,16 +57,22 @@ const wagesEarnedOnDate = (record, date) => {
 const allWagesFor = (record) => {
     let pay = 0;
     for (let i = 0; i < record.timeInEvents.length; i++) {
-        let payDay = wagesEarnedOnDate(record, record.timeInEvents[i])
+        let payDay = wagesEarnedOnDate(record, record.timeInEvents[i].date)
         pay += payDay
     }
     return pay
 }
 
-const findEmployeeByFirstName = () => {
-
-}
-
-const calculatePayroll = () => {
-    
-}
+const findEmployeeByFirstName = (record, firstName) => {
+    return record.find(function(rec){
+      return rec.firstName === firstName
+    })
+  }
+  
+  const calculatePayroll = (arr) => {
+    const totalPay = arr.reduce((acc, record) => {
+        const totalPayForEmployee = allWagesFor(record)
+        return acc + totalPayForEmployee
+    }, 0)
+    return totalPay
+  }
